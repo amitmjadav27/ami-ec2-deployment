@@ -3,7 +3,7 @@
 set -e
 
 STACK_NAME="ami-ec2-deployment-stack"
-REGION="us-east-1"
+REGION="ap-south-1"
 TEMPLATE_FILE="cloudformation-template.yaml"
 
 echo "Deploying EC2 instance using AMI from Parameter Store..."
