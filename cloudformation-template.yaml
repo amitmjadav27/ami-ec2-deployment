@@ -1,0 +1,25 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Deploy EC2 instance using custom AMI from Parameter Store'
+
+Resources:
+  EC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: !Sub '{{resolve:ssm:/ami-factory/github-actions-linux-ami-id}}'
+      InstanceType: t3.micro
+      Tags:
+        - Key: Name
+          Value: AMI-EC2-Instance
+
+Outputs:
+  InstanceId:
+    Description: 'EC2 Instance ID'
+    Value: !Ref EC2Instance
+  
+  PublicIP:
+    Description: 'Public IP Address'
+    Value: !GetAtt EC2Instance.PublicIp
+  
+  AMIId:
+    Description: 'AMI ID used for deployment'
+    Value: !Sub '{{resolve:ssm:/ami-factory/github-actions-linux-ami-id}}'
