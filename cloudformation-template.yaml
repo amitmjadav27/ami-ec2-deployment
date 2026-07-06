@@ -1,12 +1,18 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: 'Deploy EC2 instance using custom AMI from Parameter Store'
 
+Parameters:
+  KeyName:
+    Type: AWS::EC2::KeyPair::KeyName
+    Description: Name of an existing EC2 KeyPair to enable SSH access
+
 Resources:
   EC2Instance:
     Type: AWS::EC2::Instance
     Properties:
       ImageId: !Sub '{{resolve:ssm:/ami-factory/github-actions-linux-ami-id}}'
       InstanceType: t3.micro
+      KeyName: !Ref KeyName
       Tags:
         - Key: Name
           Value: AMI-EC2-Instance
