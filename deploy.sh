@@ -12,6 +12,7 @@ aws cloudformation deploy \
   --template-file $TEMPLATE_FILE \
   --stack-name $STACK_NAME \
   --region $REGION
+  --parameter-overrides KeyName=amitmjadav008
 
 echo "Stack deployed successfully!"
 
